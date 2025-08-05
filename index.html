@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Challenges Hub 🧠</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <h1>Logic & Code Hub 🌊</h1>
+        <p>Explora, resuelve y aprende con estos desafíos de programación interactivos.</p>
+    </header>
+
+    <main class="challenges-grid">
+
+        <!-- 🟦 Card 1: Números Primos -->
+        <article class="card" id="card-primes">
+            <div class="card-content">
+                <h2><span>🧮</span> Números Primos</h2>
+                <p>Encuentra todos los números primos dentro de un rango específico.</p>
+                <div class="input-group">
+                    <input type="number" id="prime-from" placeholder="Valor inicial" aria-label="Valor inicial para primos">
+                    <input type="number" id="prime-to" placeholder="Valor final" aria-label="Valor final para primos">
+                </div>
+                <button class="btn" id="calculate-primes">Calcular</button>
+                <div class="result" id="prime-result"></div>
+                <button class="solution-btn" data-modal-target="prime-modal">🔍 Ver Solución</button>
+            </div>
+        </article>
+
+        <!-- 🟨 Card 2: Serie Fibonacci -->
+        <article class="card" id="card-fibonacci">
+            <div class="card-content">
+                <h2><span>📜</span> Serie Fibonacci</h2>
+                <p>Genera la secuencia de Fibonacci hasta el límite que indiques.</p>
+                <div class="input-group">
+                    <input type="number" id="fib-limit" placeholder="Número límite" aria-label="Número límite para Fibonacci">
+                </div>
+                <button class="btn" id="calculate-fib">Generar</button>
+                <div class="result" id="fib-result"></div>
+                <button class="solution-btn" data-modal-target="fib-modal">🔍 Ver Solución</button>
+            </div>
+        </article>
+
+        <!-- 🟩 Card 3: Cálculo de IMC -->
+        <article class="card" id="card-bmi">
+            <div class="card-content">
+                <h2><span>⚖️</span> Cálculo de IMC</h2>
+                <p>Calcula tu Índice de Masa Corporal a partir de tu peso y altura.</p>
+                <div class="input-group">
+                    <input type="number" id="bmi-weight" placeholder="Peso (libras)" aria-label="Peso en libras">
+                    <input type="number" id="bmi-height" placeholder="Altura (metros)" aria-label="Altura en metros">
+                </div>
+                <button class="btn" id="calculate-bmi">Calcular IMC</button>
+                <div class="result" id="bmi-result"></div>
+                <button class="solution-btn" data-modal-target="bmi-modal">🔍 Ver Solución</button>
+            </div>
+        </article>
+        
+        <!-- 🟥 Card 4: Palabra Palíndroma -->
+        <article class="card" id="card-palindrome">
+            <div class="card-content">
+                <h2><span>🔄</span> Palabra Palíndroma</h2>
+                <p>Verifica si una palabra es un palíndromo (se lee igual al revés).</p>
+                <div class="input-group">
+                    <input type="text" id="palindrome-word" placeholder="Escribe una palabra o frase" aria-label="Palabra para verificar palíndromo">
+                </div>
+                <button class="btn" id="check-palindrome">Verificar</button>
+                <div class="result" id="palindrome-result"></div>
+                <button class="solution-btn" data-modal-target="palindrome-modal">🔍 Ver Solución</button>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- ===== CONTENEDOR DE MODALES ===== -->
+    <div class="modal-container">
+        
+        <!-- Modal Números Primos -->
+        <div class="modal" data-modal-id="prime-modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="close-btn" aria-label="Cerrar modal">×</button>
+                <h2>Solución: Números Primos</h2>
+                <div class="modal-section">
+                    <h4>Explicación de la Lógica</h4>
+                    <p>La función verifica si un número es primo. Primero, descarta casos obvios (menores a 2, o múltiplos de 2 y 3). Luego, itera desde 5, saltando de 6 en 6, lo que permite comprobar dos posibles divisores (`i` e `i+2`) en cada paso. Este método es una optimización del Criba de Eratóstenes para un solo número.</p>
+                </div>
+                <div class="modal-section">
+                    <h4>Código de Ejemplo</h4>
+                    <pre><code>function isPrime(num) {
+  if (num <= 1) return false;
+  if (num <= 3) return true;
+  if (num % 2 === 0 || num % 3 === 0) return false;
+  
+  for (let i = 5; i * i <= num; i = i + 6) {
+    if (num % i === 0 || num % (i + 2) === 0) {
+      return false;
+    }
+  }
+  return true;
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Serie Fibonacci -->
+        <div class="modal" data-modal-id="fib-modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="close-btn" aria-label="Cerrar modal">×</button>
+                <h2>Solución: Serie Fibonacci</h2>
+                <div class="modal-section">
+                    <h4>Explicación de la Lógica</h4>
+                    <p>Se utiliza un enfoque iterativo para mayor eficiencia. Se inicia un array con `[0, 1]`. Luego, un bucle `while` calcula el siguiente número sumando los dos últimos de la serie. Si el nuevo número no excede el límite, se añade al array. Este método evita la sobrecarga de la recursividad.</p>
+                </div>
+                <div class="modal-section">
+                    <h4>Código de Ejemplo</h4>
+                    <pre><code>function fibonacciSeries(limit) {
+  if (limit < 0) return [];
+  if (limit === 0) return [0];
+
+  const series = [0, 1];
+  while (true) {
+    let next = series[series.length - 1] + series[series.length - 2];
+    if (next > limit) break;
+    series.push(next);
+  }
+  return series;
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Cálculo de IMC -->
+        <div class="modal" data-modal-id="bmi-modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="close-btn" aria-label="Cerrar modal">×</button>
+                <h2>Solución: Cálculo de IMC</h2>
+                <div class="modal-section">
+                    <h4>Explicación de la Fórmula</h4>
+                    <p>El cálculo sigue dos pasos: <strong>1. Conversión:</strong> Se convierte el peso de libras a kilogramos (`pesoLibras * 0.453592`). <strong>2. Fórmula IMC:</strong> Se aplica la fórmula estándar `peso (kg) / (altura (m)²)`. Finalmente, el resultado numérico se clasifica en categorías (Bajo peso, Normal, etc.) para una mejor interpretación.</p>
+                </div>
+                <div class="modal-section">
+                    <h4>Código de Ejemplo</h4>
+                    <pre><code>function calculateBmi(weightLbs, heightM) {
+  const weightKg = weightLbs * 0.453592;
+  const bmi = weightKg / (heightM ** 2);
+  let category;
+
+  if (bmi < 18.5) category = 'Bajo peso';
+  else if (bmi < 24.9) category = 'Peso normal';
+  else if (bmi < 29.9) category = 'Sobrepeso';
+  else category = 'Obesidad';
+  
+  return `IMC: ${bmi.toFixed(2)} (${category})`;
+}</code></pre>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Palabra Palíndroma -->
+        <div class="modal" data-modal-id="palindrome-modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="close-btn" aria-label="Cerrar modal">×</button>
+                <h2>Solución: Palabra Palíndroma</h2>
+                <div class="modal-section">
+                    <h4>Explicación de la Lógica</h4>
+                    <p>Para una comparación robusta, la cadena de texto se "normaliza": <strong>1.</strong> Se convierte a minúsculas. <strong>2.</strong> Se eliminan todos los caracteres que no sean letras o números (espacios, signos de puntuación) usando una expresión regular. Luego, se compara la cadena limpia con su versión invertida. Si son idénticas, es un palíndromo.</p>
+                </div>
+                <div class="modal-section">
+                    <h4>Código de Ejemplo</h4>
+                    <pre><code>function isPalindrome(text) {
+  // Normaliza el texto: a minúsculas y sin caracteres no alfanuméricos.
+  const cleaned = text.toLowerCase().replace(/[\W_]/g, '');
+
+  // Invierte la cadena limpia.
+  const reversed = cleaned.split('').reverse().join('');
+  
+  // Compara la versión limpia con la invertida.
+  return cleaned === reversed;
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="main-footer">
+        <p>🤖 Materia: Inteligencia Artificial | Sección 710 | Proyecto generado con prompt personalizado por Juancito Peña Vizcaíno</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
